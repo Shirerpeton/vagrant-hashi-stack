@@ -1,0 +1,26 @@
+- name: nomad installed
+  ansible.builtin.apt:
+    name:
+      - nomad
+    state: latest
+    update_cache: true
+  become: true
+
+- name: nomad config
+  template:
+    src: nomad.hcl.j2
+    dest: /etc/nomad.d/nomad.hcl
+    mode: "0440"
+  notify:
+    - restart nomad
+  become: true
+
+- name: nomad agent service
+  systemd:
+    name: nomad
+    state: started
+    daemon_reload: yes
+    enabled: true
+  vars:
+    ansible_command_timeout: 30
+  become: true

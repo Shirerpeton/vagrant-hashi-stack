@@ -1,0 +1,26 @@
+- name: consul installed
+  ansible.builtin.apt:
+    name:
+      - consul
+    state: latest
+    update_cache: true
+  become: true
+
+- name: consul config
+  template:
+    src: consul.hcl.j2
+    dest: /etc/consul.d/consul.hcl
+    mode: "0440"
+  notify:
+    - restart consul
+  become: true
+
+- name: consul agent service
+  systemd:
+    name: consul
+    state: started
+    daemon_reload: yes
+    enabled: true
+  vars:
+    ansible_command_timeout: 30
+  become: true

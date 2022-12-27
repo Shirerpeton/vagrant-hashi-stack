@@ -1,0 +1,8 @@
+- name: hashi-stack installed and configured 
+  hosts: all
+  roles:
+  - docker
+  - common
+  - nomad
+  - consul
+  - vault

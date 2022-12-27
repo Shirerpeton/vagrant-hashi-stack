@@ -1,0 +1,38 @@
+- name: signing key added
+  ansible.builtin.apt_key:
+    url: "https://apt.releases.hashicorp.com/gpg"
+    state: present
+  become: true
+  
+- name: hashicorp repository in sources list
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+    state: present
+  become: true
+
+- name: vault installed
+  ansible.builtin.apt:
+    name:
+      - vault
+    state: latest
+    update_cache: true
+  become: true
+
+- name: vault config
+  template:
+    src: vault.hcl.j2
+    dest: /etc/vault.d/vault.hcl
+    mode: "0440"
+  notify:
+    - restart vault
+  become: true
+
+- name: vault agent service
+  systemd:
+    name: vault
+    state: started
+    daemon_reload: yes
+    enabled: true
+  vars:
+    ansible_command_timeout: 30
+  become: true

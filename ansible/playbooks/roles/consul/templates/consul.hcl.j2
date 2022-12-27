@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+datacenter = "consul-dc"
+data_dir = "/opt/consul"
+node_name = "consul01"
+
+server = true
+bootstrap_expect = 1
+
+bind_addr = "{{ host_ip_address }}"
+client_addr = "{{ host_ip_address }}"
+
+#encrypt = "{{ consul_gossip_encryption_key }}"
+encrypt_verify_outgoing = false
+encrypt_verify_incoming = false
+verify_server_hostname = false
+
+ui_config {
+  enabled = true
+}
+

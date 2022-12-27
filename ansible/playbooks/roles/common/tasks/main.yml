@@ -1,0 +1,11 @@
+- name: signing key added
+  ansible.builtin.apt_key:
+    url: "{{ hashicorp_key_url }}"
+    state: present
+  become: true
+  
+- name: hashicorp repository in sources list
+  ansible.builtin.apt_repository:
+    repo: "{{ hashicorp_key_repo }}"
+    state: present
+  become: true

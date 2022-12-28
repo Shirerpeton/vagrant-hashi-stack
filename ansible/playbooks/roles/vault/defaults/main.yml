@@ -1,0 +1,1 @@
+hashi_vault_api_address: "http://{{ host_ip_address }}:8200"

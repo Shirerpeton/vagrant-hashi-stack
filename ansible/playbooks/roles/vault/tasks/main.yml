@@ -25,4 +25,6 @@
     ansible_command_timeout: 30
   become: true
 
-- name: create vault
+- name: vault initialized and unsealed
+  import_tasks: init.yml
+  tags: vault-init

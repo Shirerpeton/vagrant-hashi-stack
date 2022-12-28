@@ -1,3 +1,1 @@
-host_ip_address: "172.40.20.10"
-hashicorp_key_url: "https://apt.releases.hashicorp.com/gpg"
-hashicorp_key_repo: ""deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+host_ip_address: "192.168.56.10"

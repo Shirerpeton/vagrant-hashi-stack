@@ -3,6 +3,6 @@
   roles:
   - docker
   - common
-  - nomad
   - consul
   - vault
+  - nomad

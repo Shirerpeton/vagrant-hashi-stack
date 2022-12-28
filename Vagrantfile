@@ -10,10 +10,11 @@ Vagrant.configure("2") do |config|
   config.vm.define "debian11" do |deb|
     deb.vm.hostname = "dev01"
     deb.vm.box = "generic/debian11"
-    deb.vm.network "private_network", ip: "172.20.20.10"
+    deb.vm.network "private_network", ip: "192.168.56.10"
     deb.vm.synced_folder "./shared", "/shared"
     deb.vm.provision "ansible" do |ansible|
       ansible.playbook = "./ansible/playbooks/hashi-stack.yml"
+      #ansible.tags = "vault-init"
     end
   end
 end

@@ -43,12 +43,21 @@
     - "export VAULT_ADDR={{ hashi_vault_api_address }}"
     - "export VAULT_TOKEN={{ vault_init_output.root_token }}"
 
-- name: get vault status
-  import_tasks: status.yml
+- name: unseal vault
+  ansible.builtin.import_tasks: unseal.yml
 
-- name: check if vault is initialized
+- name: get vault status
+  ansible.builtin.import_tasks: status.yml
+
+- name: checked if vault is initialized
   ansible.builtin.assert:
     that:
       - vault_status.initialized | bool
+    quiet: yes
+
+- name: checked if vault is unsealed
+  ansible.builtin.assert:
+    that:
+      - not vault_status.sealed | bool
     quiet: yes
 

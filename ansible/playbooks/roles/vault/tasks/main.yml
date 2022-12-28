@@ -30,3 +30,11 @@
   tags: vault-init
   environment:
     VAULT_ADDR: "{{ hashi_vault_api_address }}"
+    
+- name: vault configured
+  import_tasks: configure.yml
+  tags: vault-configure
+  environment:
+    VAULT_ADDR: "{{ hashi_vault_api_address }}"
+    VAULT_TOKEN: "{{ vault_init_output.root_token }}"
+

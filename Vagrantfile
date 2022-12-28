@@ -14,7 +14,6 @@ Vagrant.configure("2") do |config|
     deb.vm.synced_folder "./shared", "/shared"
     deb.vm.provision "ansible" do |ansible|
       ansible.playbook = "./ansible/playbooks/hashi-stack.yml"
-      #ansible.tags = "vault-init"
     end
   end
 end

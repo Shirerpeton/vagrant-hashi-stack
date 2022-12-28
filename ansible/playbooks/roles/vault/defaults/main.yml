@@ -1,1 +1,3 @@
 hashi_vault_api_address: "http://{{ host_ip_address }}:8200"
+nomad_server_policy_dest: /tmp/nomad_server_policy.hcl
+nomad_cluster_role_dest: /tmp/nomad_cluster_role.json

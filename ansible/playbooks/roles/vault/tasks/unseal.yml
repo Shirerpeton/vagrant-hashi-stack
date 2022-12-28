@@ -4,4 +4,3 @@
   loop: "{{ hashi_vault_unseal_keys }}"
   loop_control:
     label: "hidden"
-  when: vault_status.sealed

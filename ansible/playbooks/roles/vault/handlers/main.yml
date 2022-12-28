@@ -10,7 +10,6 @@
 
 - name: unseal vault
   block:
-    - ansible.builtin.import_tasks: status.yml
     - ansible.builtin.import_tasks: unseal.yml
     - ansible.builtin.import_tasks: status.yml
     - ansible.builtin.assert:

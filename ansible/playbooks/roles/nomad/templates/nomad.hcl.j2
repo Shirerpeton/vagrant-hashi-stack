@@ -4,6 +4,11 @@ data_dir = "/opt/nomad"
 name =  "nomad01"
 client {
   enabled = true
+  template {
+    vault_retry {
+      attempts = 0
+    }
+  }
 }
 server {
   enabled = true

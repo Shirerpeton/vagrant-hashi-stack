@@ -4,24 +4,24 @@
     dest: "{{ item.dest }}"
     mode: "0440"
   with_items:
-    - src: ./nomad_server_policy.hcl
+    - src: ./nomad-server-policy.hcl
       dest: "{{ nomad_server_policy_dest }}"
-    - src: ./nomad_cluster_role.json
+    - src: ./nomad-cluster-role.json
       dest: "{{ nomad_cluster_role_dest }}"
   become: true
 
-- name: nomad_server policy is set
-  ansible.builtin.command: vault policy write nomad_server "{{ nomad_server_policy_dest }}"
+- name: nomad-server policy is set
+  ansible.builtin.command: vault policy write nomad-server "{{ nomad_server_policy_dest }}"
   register: vault_policy_write
   become: true
 
-- name: nomad_cluster role is set
-  ansible.builtin.command: vault write auth/token/roles/nomad_cluster @"{{ nomad_cluster_role_dest }}"
+- name: nomad-cluster role is set
+  ansible.builtin.command: vault write auth/token/roles/nomad-cluster @"{{ nomad_cluster_role_dest }}"
   register: vault_role_write
   become: true
 
 - name: token is created
-  ansible.builtin.command: vault token create -policy=nomad_server -period=72h -orphan -format=yml
+  ansible.builtin.command: vault token create -policy=nomad-server -period=72h -orphan -format=yml
   register: vault_token_create
   become: true
 

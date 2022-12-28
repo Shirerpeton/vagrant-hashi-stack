@@ -1,0 +1,9 @@
+- name: check status of vault
+  ansible.builtin.command:
+    cmd: vault status -format=yaml
+  register: vault_status_raw
+  failed_when: vault_status_raw.rc is not in [0, 1, 2]
+
+- name: vault_status saved
+  ansible.builtin.set_fact:
+    vault_status: "{{ vault_status_raw.stdout | from_yaml }}"

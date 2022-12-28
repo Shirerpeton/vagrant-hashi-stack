@@ -1,8 +1,22 @@
 ---
 - name: restart vault
-  systemd:
+  ansible.builtin.systemd:
     name: vault
     state: restarted
     daemon_reload: true
+  notify:
+    - unseal vault
   become: true
 
+- name: unseal vault
+  block:
+    - ansible.builtin.import_tasks: status.yml
+    - ansible.builtin.import_tasks: unseal.yml
+    - ansible.builtin.import_tasks: status.yml
+    - ansible.builtin.assert:
+        that:
+          - not vault_status.sealed | bool
+        quiet: yes
+  environment:
+    VAULT_ADDR: "{{ hashi_vault_api_address }}"
+  become: true

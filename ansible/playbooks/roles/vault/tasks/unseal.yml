@@ -1,0 +1,7 @@
+- name: unseal vault
+  ansible.builtin.command:
+    cmd: vault operator unseal {{ item }}
+  loop: "{{ hashi_vault_unseal_keys }}"
+  loop_control:
+    label: "hidden"
+  when: vault_status.sealed

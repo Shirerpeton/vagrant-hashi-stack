@@ -28,3 +28,5 @@
 - name: vault initialized and unsealed
   import_tasks: init.yml
   tags: vault-init
+  environment:
+    VAULT_ADDR: "{{ hashi_vault_api_address }}"
